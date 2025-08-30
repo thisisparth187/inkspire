@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* @plugin "daisyui"; */
+@plugin "daisyui" {
+    themes: coffee --default;
+}
+
+/* Hide scrollbar for Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE/Edge */
+* {
+  -ms-overflow-style: none;
+}
