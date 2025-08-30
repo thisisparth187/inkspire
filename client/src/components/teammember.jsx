@@ -1,26 +1,30 @@
 import React from 'react';
+import pfp1 from '../assets/images/members/1.png';
+import pfp2 from '../assets/images/members/2.png';
+import pfp3 from '../assets/images/members/3.png';
+import pfp4 from '../assets/images/members/4.png';
 
 export default function TeamSection() {
   const members = [
     {
       name: "Marvin McKinney",
       role: "Founder",
-      img: "https://avatar.iran.liara.run/public/boy",
+      img: pfp1,
     },
     {
       name: "Kathryn Murphy",
       role: "CTO",
-      img: "https://avatar.iran.liara.run/public/45",
+      img: pfp2,
     },
     {
       name: "Jerome Bell",
       role: "CMO",
-      img: "https://avatar.iran.liara.run/public/4",
+      img: pfp3,
     },
     {
       name: "Wade Warren",
       role: "CEO",
-      img: "https://avatar.iran.liara.run/public/girl",
+      img: pfp4,
     },
   ];
 

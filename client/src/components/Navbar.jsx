@@ -17,7 +17,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-100 mt-3 w-52 p-2 shadow-xl">
                         <li><NavLink to="/" className={linkClasses}>Home</NavLink></li>
                         <li><NavLink to="/blogs" className={linkClasses}>Blogs</NavLink></li>
-                        <li><NavLink to="/profile" className={linkClasses}>Profile</NavLink></li>
+                        <li><NavLink to="/create" className={linkClasses}>Create</NavLink></li>
                     </ul>
                 </div>
                 <Link to="/" className="p-4 text-xl font-bold">INKSPIRE</Link>
@@ -26,7 +26,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 <ul className="menu menu-horizontal px-1">
                     <li className='px-4 text-md'><NavLink to="/" className={linkClasses}>Home</NavLink></li>
                     <li className='px-4 text-md'><NavLink to="/blogs" className={linkClasses}>Blogs</NavLink></li>
-                    <li className='px-4 text-md'><NavLink to="/profile" className={linkClasses}>Profile</NavLink></li>
+                    <li className='px-4 text-md'><NavLink to="/create" className={linkClasses}>Create</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">

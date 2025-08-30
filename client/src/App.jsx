@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import BlogDetails from './pages/BlogDetails';
+import AllBlogs from './pages/AllBlogs';
+import CreateBlog from "./pages/CreateBlog";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -38,6 +40,8 @@ const App = () => {
             />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
+            <Route path="/blogs" element={<AllBlogs />} />
+            <Route path="/create" element={<CreateBlog />} />
           </Routes>
         </main>
         <Footer />
