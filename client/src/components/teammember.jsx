@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import pfp1 from '../assets/images/members/1.png';
 import pfp2 from '../assets/images/members/2.png';
 import pfp3 from '../assets/images/members/3.png';
@@ -29,7 +30,12 @@ export default function TeamSection() {
   ];
 
   return (
-    <section className="py-12 sm:py-16">
+    <motion.section className="py-12 sm:py-16"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      viewport={{ once: true }}
+    >
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Heading */}
         <div className="mb-16 text-center">
@@ -66,6 +72,6 @@ export default function TeamSection() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

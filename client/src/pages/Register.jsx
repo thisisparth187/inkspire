@@ -42,7 +42,6 @@ const Register = () => {
     try {
       const data = await register({ username, email, password });
       localStorage.setItem("token", data.token); // save JWT
-      alert("Register successful successful!");
       window.location.href = "/";
     } catch (err) {
       console.error(err);

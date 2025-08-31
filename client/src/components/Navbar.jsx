@@ -32,7 +32,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
             <div className="navbar-end">
 
                 {isAuthenticated ? (
-                    <div className="dropdown dropdown-end mr-4">
+                    <div className="dropdown dropdown-end mr-4 cursor-pointer">
                         <div tabIndex={0} role="button" className="avatar w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
                             <img
                                 src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
@@ -44,8 +44,8 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                             tabIndex={0}
                             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-4"
                         >
-                            <li><a>Profile</a></li>
-                            <li><a>Logout</a></li>
+                            <li><NavLink to='/profile'>Profile</NavLink></li>
+                            <li><button onClick={onLogout}>Logout</button></li>
                         </ul>
                     </div>
 

@@ -40,9 +40,8 @@ export default function Login() {
     try {
       const data = await login({ email, password });
       localStorage.setItem("token", data.token); // save JWT
-      alert("Login successful!");
       // redirect to dashboard
-      window.location.href = "/dashboard";
+      window.location.href = "/profile";
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Login failed");

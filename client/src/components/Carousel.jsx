@@ -69,10 +69,14 @@ export default function TextCarousel() {
 
   return (
     <section className="w-full flex-col items-center justify-center font-sans overflow-hidden my-16">
-      <div
+      <motion.div
         className="w-full max-w-4xl mx-auto p-4"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
       >
         <div className="relative flex w-full flex-col rounded-3xl border border-border bg-background p-6">
           <div className="relative w-full h-[320px] flex items-center justify-center overflow-hidden pt-16">
@@ -180,7 +184,7 @@ export default function TextCarousel() {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
