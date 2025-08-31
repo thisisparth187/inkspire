@@ -3,10 +3,12 @@ import Hero from '../components/Hero'
 import TextCarousel from '../components/Carousel'
 import TeamMember from '../components/teammember'
 import { motion } from 'framer-motion';
+import Background from '../components/Background'
+
 const Home = ({ isAuthenticated }) => {
   return (
     <div>
-      <Hero isAuthenticated={isAuthenticated} />
+        <Hero isAuthenticated={isAuthenticated} />
       <motion.div className="flex flex-col items-center content-center py-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

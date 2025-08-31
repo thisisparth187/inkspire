@@ -42,7 +42,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
 
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+                            className="dropdown-content menu p-2 shadow-2xl bg-primary-content/40 rounded-xl w-52 mt-4"
                         >
                             <li><NavLink to='/profile'>Profile</NavLink></li>
                             <li><button onClick={onLogout}>Logout</button></li>
