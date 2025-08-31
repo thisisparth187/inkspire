@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import TiptapEditor from "../components/Editor"; // adjust path
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
+
 
 const CreateBlog = () => {
   const [formData, setFormData] = useState({
     title: "",
-    description: "", // will hold HTML from Tiptap
+    description: "", // will hold HTML from Quill
     author: "",
     featured: false,
     avatar: null,
@@ -21,18 +23,25 @@ const CreateBlog = () => {
     }
   };
 
+  // Quill has its own onChange handler → get the value directly
+  const handleQuillChange = (value) => {
+    setFormData({ ...formData, description: value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Blog Created:", formData);
-    // later: send to backend
+    // TODO: send to backend later with axios.post()
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-10">
+    <div className="max-w-6xl mx-auto py-10">
       <h2 className="text-3xl font-bold mb-6 text-center">Create New Blog</h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-6 bg-base-200 p-6 rounded-xl shadow">
-        
+
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 bg-base-200 p-6 rounded-xl shadow"
+      >
         {/* Title */}
         <div>
           <label className="block mb-2 font-medium">Blog Title</label>
@@ -46,14 +55,17 @@ const CreateBlog = () => {
           />
         </div>
 
-        {/* Tiptap Editor for Description */}
+        {/* Quill Editor for Content */}
         <div>
           <label className="block mb-2 font-medium">Content</label>
-          <TiptapEditor
+          <ReactQuill
+            theme="snow"
             value={formData.description}
-            onChange={(val) => setFormData({ ...formData, description: val })}
+            onChange={handleQuillChange}
+            className="rounded-lg custom-quill"
           />
         </div>
+
 
         {/* Author */}
         <div>

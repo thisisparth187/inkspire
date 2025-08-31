@@ -30,8 +30,25 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                 </ul>
             </div>
             <div className="navbar-end">
+
                 {isAuthenticated ? (
-                    <button onClick={onLogout} className="btn">Logout</button>
+                    <div className="dropdown dropdown-end mr-4">
+                        <div tabIndex={0} role="button" className="avatar w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
+                            <img
+                                src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                                alt="User Avatar"
+                            />
+                        </div>
+
+                        <ul
+                            tabIndex={0}
+                            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+                        >
+                            <li><a>Profile</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
+                    </div>
+
                 ) : (
                     <Link to="/login" className="btn">Login</Link>
                 )}

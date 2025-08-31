@@ -19,3 +19,56 @@
 * {
   -ms-overflow-style: none;
 }
+
+
+
+/* Custom Quill Editor Height */
+.custom-quill .ql-container {
+  height: 300px;       /* fixed height */
+  overflow-y: auto;    /* enable vertical scroll */
+  outline: none;
+  border: none;
+}
+
+
+
+.custom-quill .ql-editor {
+  min-height: 280px;   /* ensures padding inside */
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+/* Toolbar background & border */
+.custom-quill .ql-toolbar {
+  border: 1px solid #ff9800;  /* orange border */
+  border-radius: 0.5rem 0.5rem 0 0;
+  color: #ff9800;
+}
+
+/* Dropdown (Normal, Heading, etc.) */
+.custom-quill .ql-toolbar .ql-picker {
+  color: #ff9800;   /* text color */
+}
+
+/* Active button */
+.custom-quill .ql-toolbar button.ql-active {
+  color: #ff9800;
+  fill: #ff9800;
+}
+
+/* Inactive button */
+.custom-quill .ql-toolbar button {
+  color: #cccccc;
+  fill: #cccccc;
+}
+
+/* Hover effect */
+.custom-quill .ql-toolbar button:hover {
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+/* Dropdown options */
+.custom-quill .ql-picker-options {
+  color: #ff9800;
+}
