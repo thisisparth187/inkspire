@@ -24,13 +24,17 @@ router.post(
         body("password")
             .isLength({ min: 6 })
             .withMessage("Password must be at least 6 characters"),
+        body("avatar")
+            .notEmpty()
+            .withMessage("Select an avatar"),
+
     ],
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.array() });
 
-        const { username, email, password } = req.body;
+        const { username, email, password, avatar } = req.body;
 
         try {
             const existing = await User.findOne({ email: email.toLowerCase() });
@@ -44,6 +48,7 @@ router.post(
                 username,
                 email: email.toLowerCase(),
                 password: hash,
+                avatar: avatar,
             });
 
             const token = signToken(user._id);
@@ -53,12 +58,14 @@ router.post(
                     id: user._id,
                     username: user.username,
                     email: user.email,
+                    avatar: user.avatar,
                     createdAt: user.createdAt,
                 },
                 token,
             });
         } catch (err) {
             console.error("Register error:", err.message);
+            console.log("REQ BODY:", req.body);
             return res.status(500).json({ message: "Server error" });
         }
     }

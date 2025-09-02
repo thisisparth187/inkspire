@@ -138,7 +138,7 @@ export default function TextCarousel() {
 
                   <motion.button
                     onClick={() => handleReadMore(item)}
-                    className="px-6 py-3 bg-primary text-secondary font-semibold rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="px-6 py-3 btn btn-primary font-semibold rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{
                       opacity: index === activeIndex ? 1 : 0,

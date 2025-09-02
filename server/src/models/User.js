@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false, // don’t return by default
     },
+    avatar: {
+      type: String,
+      required: [true, "Choose an avatar"],
+    },
   },
   { timestamps: true }
 );

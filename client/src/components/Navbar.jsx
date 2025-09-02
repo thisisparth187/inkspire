@@ -1,6 +1,17 @@
 import { NavLink, Link } from "react-router-dom";
+import defaultAvatar from "../assets/avatars/avatar1.png"
+import { useState, useEffect } from "react";
 
 const Navbar = ({ isAuthenticated, onLogout }) => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        // Example: load from localStorage after register
+        const savedUser = JSON.parse(localStorage.getItem("user"));
+        if (savedUser) setUser(savedUser);
+        console.log(savedUser);
+    }, []);
+
     const linkClasses = ({ isActive }) =>
         isActive
             ? "px-4 text-md font-semibold text-primary transition"
@@ -33,11 +44,18 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
 
                 {isAuthenticated ? (
                     <div className="dropdown dropdown-end mr-4 cursor-pointer">
-                        <div tabIndex={0} role="button" className="avatar w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
+                        <div tabIndex={0} role="button" className="avatar w-10 rounded-full overflow-hidden hover:outline-6 duration-100 ease-in-out outline-neutral">
                             <img
-                                src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                                src={
+                                    user?.avatar
+                                        ? user.avatar.startsWith("http")
+                                            ? user.avatar          // external URL
+                                            : user.avatar          // already has /avatars/ prefix
+                                        : defaultAvatar
+                                }
                                 alt="User Avatar"
                             />
+
                         </div>
 
                         <ul

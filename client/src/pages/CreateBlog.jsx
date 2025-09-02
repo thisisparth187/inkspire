@@ -7,6 +7,7 @@ const CreateBlog = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "", // will hold HTML from Quill
+    content: "",
     author: "",
     featured: false,
     avatar: null,
@@ -55,7 +56,20 @@ const CreateBlog = () => {
           />
         </div>
 
-        {/* Quill Editor for Content */}
+        {/* Description */}
+        <div>
+          <label className="block mb-2 font-medium">Blog Description</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
+        {/* Content */}
         <div>
           <label className="block mb-2 font-medium">Content</label>
           <ReactQuill
@@ -77,18 +91,6 @@ const CreateBlog = () => {
             onChange={handleChange}
             className="input input-bordered w-full"
             required
-          />
-        </div>
-
-        {/* Upload Avatar */}
-        <div>
-          <label className="block mb-2 font-medium">Upload Avatar</label>
-          <input
-            type="file"
-            name="avatar"
-            accept="image/*"
-            onChange={handleChange}
-            className="file-input file-input-bordered w-full"
           />
         </div>
 

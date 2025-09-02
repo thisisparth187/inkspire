@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { register } from '../services/authServices';
 
+import avatar1 from "/avatars/avatar1.png";
+import avatar2 from "/avatars/avatar2.png";
+import avatar3 from "/avatars/avatar6.png";
+import avatar4 from "/avatars/avatar7.png";
+
+const avatars = [avatar1, avatar2, avatar3, avatar4];
+
 const UserIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -36,18 +43,36 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selectedAvatar) {
+      alert("Please select an avatar before registering!");
+      return;
+    }
+
     try {
-      const data = await register({ username, email, password });
-      localStorage.setItem("token", data.token); // save JWT
+      const res = await register({
+        username,
+        email,
+        password,
+        avatar: selectedAvatar,
+      });
+
+      // Save both user and token
+      localStorage.setItem("user", JSON.stringify(res.user));
+      localStorage.setItem("token", res.token);
+
       window.location.href = "/";
     } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Login failed");
+      console.error(err.response?.data || err);
+      alert(err.response?.data?.message || "Registration failed");
     }
   };
+
+
 
   return (
     <div className="flex items-center justify-center py-10">
@@ -112,6 +137,23 @@ const Register = () => {
               >
                 {showPassword ? <EyeOffIcon /> : <EyeIcon />}
               </button>
+            </div>
+          </div>
+
+          {/* Avatar selection */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Choose an Avatar</label>
+            <div className="flex gap-4">
+              {avatars.map((avatar, index) => (
+                <img
+                  key={index}
+                  src={avatar}
+                  alt={`avatar-${index}`}
+                  className={`w-16 h-16 rounded-full cursor-pointer border-4 
+                ${selectedAvatar === avatar ? "border-blue-500" : "border-transparent"}`}
+                  onClick={() => setSelectedAvatar(avatar)}
+                />
+              ))}
             </div>
           </div>
 
