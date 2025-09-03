@@ -1,9 +1,15 @@
-// src/api.js
 import axios from "axios";
 
-const API = axios.create({
-    baseURL: "http://localhost:5000/api", // adjust if your backend runs elsewhere
+const API = axios.create({ baseURL: "http://localhost:5000/api" });
+
+// attach token automatically
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+  return req;
 });
 
-// Get all blogs
+export const createBlog = (blogData) => API.post("/blogs", blogData);
 export const getBlogs = () => API.get("/blogs");

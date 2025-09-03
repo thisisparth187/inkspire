@@ -7,7 +7,6 @@ const blogSchema = new mongoose.Schema(
     content: { type: String, required: true },            // Blog Content
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     featured: { type: Boolean, default: false },          // Mark as Featured
-    image: { type: String }                               // Optional blog cover image
   },
   { timestamps: true }
 );

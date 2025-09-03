@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
-
+import axios from "axios";
 
 const CreateBlog = () => {
   const [formData, setFormData] = useState({
     title: "",
-    description: "", // will hold HTML from Quill
+    description: "",
     content: "",
-    author: "",
     featured: false,
     avatar: null,
   });
@@ -24,15 +23,40 @@ const CreateBlog = () => {
     }
   };
 
-  // Quill has its own onChange handler → get the value directly
   const handleQuillChange = (value) => {
-    setFormData({ ...formData, description: value });
+    setFormData({ ...formData, content: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Blog Created:", formData);
-    // TODO: send to backend later with axios.post()
+
+    try {
+      const blogData = new FormData();
+      blogData.append("title", formData.title);
+      blogData.append("description", formData.description);
+      blogData.append("content", formData.content);
+      blogData.append("featured", formData.featured);
+
+      const res = await axios.post("http://localhost:5000/api/blogs", blogData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("✅ Blog Created:", res.data);
+      alert("Blog created successfully!");
+
+      // reset form
+      setFormData({
+        title: "",
+        description: "",
+        content: "",
+        author: "",
+        featured: false,
+        avatar: null,
+      });
+    } catch (err) {
+      console.error("❌ Error creating blog:", err);
+      alert("Failed to create blog!");
+    }
   };
 
   return (
@@ -61,8 +85,8 @@ const CreateBlog = () => {
           <label className="block mb-2 font-medium">Blog Description</label>
           <input
             type="text"
-            name="title"
-            value={formData.title}
+            name="description"   // ✅ fixed here
+            value={formData.description}
             onChange={handleChange}
             className="input input-bordered w-full"
             required
@@ -74,23 +98,9 @@ const CreateBlog = () => {
           <label className="block mb-2 font-medium">Content</label>
           <ReactQuill
             theme="snow"
-            value={formData.description}
+            value={formData.content}
             onChange={handleQuillChange}
             className="rounded-lg custom-quill"
-          />
-        </div>
-
-
-        {/* Author */}
-        <div>
-          <label className="block mb-2 font-medium">Author</label>
-          <input
-            type="text"
-            name="author"
-            value={formData.author}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-            required
           />
         </div>
 

@@ -1,41 +1,48 @@
 import { useEffect, useState } from "react";
 import { getBlogs } from "../services/api";
 import BlogCard from "../components/BlogCard";
-import FeaturedBlog from "../components/FeaturedCarousel";
+import FeaturedCarousel from "../components/FeaturedCarousel";
 
 const AllBlogs = () => {
-  const [featured, setFeatured] = useState(null);
-  const [blogs, setBlogs] = useState([]);
+    const [featured, setFeatured] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const { data } = await getBlogs();
-        setFeatured(data.find((b) => b.isFeatured));
-        setBlogs(data.filter((b) => !b.isFeatured));
-      } catch (err) {
-        console.error("Error fetching blogs:", err);
-      }
-    };
-    fetchBlogs();
-  }, []);
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const { data } = await getBlogs();
+                const featuredBlogs = data.filter((b) => b.featured === true);
+                const regularBlogs = data.filter((b) => !b.featured);
 
-  return (
-    <div className="space-y-12">
-      {/* Featured */}
-      {featured && <FeaturedBlog blog={featured} />}
+                console.log("Featured ->", featuredBlogs);
+                console.log("Regular ->", regularBlogs);
+                setFeatured(featuredBlogs);
+                setBlogs(regularBlogs);
+            } catch (err) {
+                console.error("Error fetching blogs:", err);
+            }
+        };
+        fetchBlogs();
+    }, []);
 
-      {/* Blogs Grid */}
-      <section>
-        <h2 className="text-2xl font-bold mb-6">All Blogs</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogs.map((blog) => (
-            <BlogCard key={blog._id} blog={blog} />
-          ))}
+    return (
+        <div className="container mx-auto px-4 py-8">
+            {/* Featured Blogs Carousel */}
+            {featured.length > 0 && <FeaturedCarousel blogs={featured} />}
+
+            {/* All Other Blogs */}
+            <section className="mt-12">
+                <h2 className="text-3xl font-bold mb-8 text-center">
+                    All <span className="text-primary">Blogs</span>
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {blogs.map((blog) => (
+                        <BlogCard key={blog._id} blog={blog} />
+                    ))}
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 export default AllBlogs;
