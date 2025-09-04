@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth"; // match your backend
+const API_URL = "https://inkspire-6tsq.onrender.com/api/auth"; // match your backend
 
 // Register user
 export const register = async (userData) => {
