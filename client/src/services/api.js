@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://inkspire-6tsq.onrender.com",
 });
 
 // Automatically attach token if available
