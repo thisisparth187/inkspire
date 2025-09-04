@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://inkspire-6tsq.onrender.com",
+  baseURL: "https://inkspire-6tsq.onrender.com/api/blogs",
 });
 
 // Automatically attach token if available
