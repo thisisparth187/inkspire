@@ -106,6 +106,7 @@ router.post(
                     id: user._id,
                     username: user.username,
                     email: user.email,
+                    avatar: user.avatar,   
                     createdAt: user.createdAt,
                 },
                 token,

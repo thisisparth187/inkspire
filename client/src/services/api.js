@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({
+  baseURL: "http://localhost:5000/api",
+});
 
-// attach token automatically
+// Automatically attach token if available
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -11,5 +13,15 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// Update Blog
+export const updateBlog = (id, blogData) => API.put(`/blogs/${id}`, blogData);
+
+// Create Blog
 export const createBlog = (blogData) => API.post("/blogs", blogData);
+
+// Get Blogs
 export const getBlogs = () => API.get("/blogs");
+
+export const getBlog = (id) => API.get(`/blogs/${id}`);
+
+export const deleteBlog = (id) => API.delete(`/blogs/${id}`);

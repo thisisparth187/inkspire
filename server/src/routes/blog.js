@@ -27,17 +27,23 @@ router.post("/", protect, async (req, res) => {
 // Get all blogs
 router.get("/", async (req, res) => {
   try {
-    const blogs = await Blog.find().populate("author", "username email");
+    const blogs = await Blog.find()
+      .populate("author", "username email avatar"); 
+      // only include needed fields
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
 
+
 // Get single blog
 router.get("/:id", async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id).populate("author", "username email");
+    const blog = await Blog.findById(req.params.id).populate(
+      "author",
+      "username email avatar"
+    );
     if (!blog) return res.status(404).json({ msg: "Blog not found" });
     res.json(blog);
   } catch (err) {

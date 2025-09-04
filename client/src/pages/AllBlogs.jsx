@@ -26,7 +26,7 @@ const AllBlogs = () => {
     }, []);
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 lg:px-32 py-8">
             {/* Featured Blogs Carousel */}
             {featured.length > 0 && <FeaturedCarousel blogs={featured} />}
 

@@ -40,6 +40,8 @@ export default function Login() {
     try {
       const data = await login({ email, password });
       localStorage.setItem("token", data.token); // save JWT
+      localStorage.setItem("user", JSON.stringify(data.user)); // save JWT
+      console.log(data);
       // redirect to dashboard
       window.location.href = "/profile";
     } catch (err) {

@@ -9,7 +9,6 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
         // Example: load from localStorage after register
         const savedUser = JSON.parse(localStorage.getItem("user"));
         if (savedUser) setUser(savedUser);
-        console.log(savedUser);
     }, []);
 
     const linkClasses = ({ isActive }) =>

@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { useEffect, useState } from "react";
+import { Navigation, Pagination,  A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -8,17 +9,24 @@ import { Link } from "react-router-dom";
 
 const FeaturedCarousel = ({ blogs }) => {
 	if (!blogs || blogs.length === 0) return null;
+	const [isLargeScreen, setIsLargeScreen] = useState(false);
 
+	useEffect(() => {
+		const checkScreen = () => setIsLargeScreen(window.innerWidth >= 1024);
+		checkScreen(); // initial
+		window.addEventListener("resize", checkScreen);
+		return () => window.removeEventListener("resize", checkScreen);
+	}, []);
 	return (
 		<div className="w-full mb-12">
 			<h2 className="text-3xl font-bold mb-8 text-center">
 				Featured <span className="text-primary">Blogs</span>
 			</h2>
 			<Swiper
-				modules={[Navigation, Pagination, Scrollbar, A11y]}
+				modules={[Navigation, Pagination, A11y]}
 				spaceBetween={60}
 				slidesPerView={1}
-				navigation
+				navigation={isLargeScreen}
 				pagination={{ clickable: true }}
 				scrollbar={{ draggable: true }}
 				breakpoints={{
@@ -30,7 +38,7 @@ const FeaturedCarousel = ({ blogs }) => {
 				{blogs.map((blog) => (
 					<SwiperSlide key={blog._id}>
 						<div className="card bg-neutral text-neutral-content shadow-xl h-full lg:mx-20 lg:my-10">
-							<div className="card-body m-10">
+							<div className="card-body m-5 lg:m-10">
 								<h2 className="card-title text-2xl font-bold">{blog.title}</h2>
 								<p className="opacity-80">{blog.description}</p>
 								<div className="card-actions justify-between items-center mt-4">
@@ -42,7 +50,7 @@ const FeaturedCarousel = ({ blogs }) => {
 											year: "numeric",
 										})}
 									</p>
-									<Link to={`/blogs/${blog._id}`} className="btn btn-primary">
+									<Link to={`/blogs/${blog._id}`} className="btn btn-primary mt-5 lg:mt-0">
 										Read More
 									</Link>
 								</div>
