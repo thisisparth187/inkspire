@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://my-inkspire.vercel.app/sitemap.xml
